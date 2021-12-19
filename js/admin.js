@@ -41,9 +41,7 @@ const app = createApp({
           this.isNew = false;
           productModal.show();
         } else if (item === '刪除資料'){
-          console.log('刪除資料')
           this.tempProduct = { ...data };
-          console.log( {...data} )
           this.isNew = false
           this.isDelete = true;
           productModal.show();
@@ -53,7 +51,6 @@ const app = createApp({
     getData(page = 1){
       const url = `${this.apiHex}/api/${this.apiPath}/admin/products?page=${page}`;
       axios.get(url).then((res) => {
-        console.log(res)
         this.products = res.data.products;
         this.pagination = res.data.pagination
       }).catch((error) => {
@@ -122,7 +119,6 @@ const app = createApp({
     },
     // 圖片上傳
     uploadImg(e){
-      console.log('觸發了')
       const file = e.target.files[0];
 
       const formData = new FormData();
@@ -131,7 +127,6 @@ const app = createApp({
       const url = `${this.apiHex}/api/${this.apiPath}/admin/upload`;
       axios.post(url, formData).then((res) => {
        this.tempProduct.imageUrl = res.data.imageUrl;
-       console.log(res.data.imageUrl)
       }).catch((error) => {
         alert(error.data.message)
       })
